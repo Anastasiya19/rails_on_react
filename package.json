@@ -4,5 +4,8 @@
   },
   "name": "react_on_rails",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "axios": "^0.16.2",
+    "react-input-switch": "^1.2.1"
+  }
 }
