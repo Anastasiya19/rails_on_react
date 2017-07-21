@@ -1,41 +1,53 @@
 import React from 'react';
 
+let token = document.getElementsByName('csrf-token')[0].getAttribute('content');
+axios.defaults.headers.common['X-CSRF-Token'] = token;
+axios.defaults.headers.common['Accept'] = 'application/json';
+
 export default class Todos extends React.Component {
 
-    // getInitialState() {
-    //     return {
-    //         text: ''
-    //     }
-    // }
+    getInitialState() {
+        return {
+            text: ''
+        }
+    }
+
     
+
     constructor(props) {
         super(props);
         this.state = {
             todos: this.props.todos,
-            text: ''
+            switched: false,
+            user_id :true
+
         };
-        
-        this._createTodo();
 
-        // console.log("this.state--------", this.state)
+        this.toggleSwitch = this.toggleSwitch.bind(this);
     }
 
-    // updateName = (todo) => {
-    //     this.setState({ todo });
-    //     console.log("this.props--------", this.props)
-    // };
-    
-    _createTodo (todo) {
-        // var text = this.state.text.trim();
-        console.log("this", this)
+    toggleSwitch = () => {
+        this.setState(prevState => {
+            return {
+                switched: !prevState.switched
+            };
+        });
+    };
 
-        // if (text) {
-        //     TodoActionsCreators.createTodo(text);
-        // }
-        //
-        // this.setState({text: ''});
+    _createTodo(todo) {
+
+        axios.post('/todos', {
+            todo: {todo: todo}
+        }).then((response)=>{
+            this.state.todos.push(response.data);
+            this.setState({todo: this.state.todos});
+            // this.setState({text: ''});
+            this.refs.newAddText.value = '';
+        }).catch((error)=>{
+            console.log(error);
+        });
     }
-    
+
     _onKeyDown(event) {
         if (event.keyCode === 13) {
             event.preventDefault();
@@ -52,46 +64,31 @@ export default class Todos extends React.Component {
     _renderTodos() {
         return this.state.todos.map((todo)=>{
             return(
-                <div  className="form-control"  key={todo.id}>{todo.todo}</div>
+                <div  className="form-control"  key={todo.id}>
+                    <label className="switch">
+                        <input type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label>{todo.todo}
+                </div>
             )
         })
     }
 
     render() {
-        axios.get('/{user.id}')
-            .then(function (response) {
-                console.log(this);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-
-        axios.get('/todos', {
-            params: {
-                ID: 5
-            }
-        })
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-
-
-
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
+
                 <input
                     type="text"
                     className="form-control"
+                    ref="newAddText"
                     placeholder=" Add new todo"
-                    onKeyDown={ this._onKeyDown.bind(this) }
+                    // onClick = {this.state.user_id}
                     // onChange={ this._onChange }
-                    defaultValue={ this.state.text }
+                    // defaultValue={ this.state.text }
+                    // onChange={ this._onChange }
+                    value={ this.state.text }
                     // onClick={ this._createTodo }
                 />
                 { this._renderTodos() }
