@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170721134532) do
     t.string "todo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "todo_valid"
+    t.boolean "todo_valid", default: false
     t.integer "user_id"
   end
 

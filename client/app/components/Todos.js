@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {Component} from 'react';
+import {render} from 'react-dom';
+import Switch from 'rc-switch';
+
 
 let token = document.getElementsByName('csrf-token')[0].getAttribute('content');
 axios.defaults.headers.common['X-CSRF-Token'] = token;
@@ -12,26 +15,36 @@ export default class Todos extends React.Component {
         }
     }
 
-    
-
     constructor(props) {
         super(props);
         this.state = {
             todos: this.props.todos,
             switched: false,
-            user_id :true
+            // user_id :true
 
         };
 
         this.toggleSwitch = this.toggleSwitch.bind(this);
     }
 
-    toggleSwitch = () => {
-        this.setState(prevState => {
-            return {
-                switched: !prevState.switched
-            };
-        });
+    toggleSwitch(switched, todos) {
+
+
+       var x =  this.state.todos.map((todo) => {todo});
+
+        axios.post('/todos', {
+
+            switched: {switched: switched}
+        })
+            .then(function (response) {
+                console.log("response-------", response);
+
+              todo.todo_valid == switched
+                // this.setState({todo_valid: !this.state.switched});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     _createTodo(todo) {
@@ -49,10 +62,9 @@ export default class Todos extends React.Component {
     }
 
     _onKeyDown(event) {
-        if (event.keyCode === 13) {
+        if (event.key === 'Enter') {
             event.preventDefault();
             // console.log("this", this)
-
             this._createTodo(event.target.value);
         }
     }
@@ -64,11 +76,9 @@ export default class Todos extends React.Component {
     _renderTodos() {
         return this.state.todos.map((todo)=>{
             return(
-                <div  className="form-control"  key={todo.id}>
-                    <label className="switch">
-                        <input type="checkbox"/>
-                        <span className="slider round"></span>
-                    </label>{todo.todo}
+                <div className="form-control"  key={todo.id}>
+                    <Switch onChange={ this.toggleSwitch.bind(this)}   />
+                    {todo.todo}
                 </div>
             )
         })
@@ -78,7 +88,6 @@ export default class Todos extends React.Component {
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
-
                 <input
                     type="text"
                     className="form-control"
@@ -87,8 +96,7 @@ export default class Todos extends React.Component {
                     // onClick = {this.state.user_id}
                     // onChange={ this._onChange }
                     // defaultValue={ this.state.text }
-                    // onChange={ this._onChange }
-                    value={ this.state.text }
+                    onKeyPress={ this._onKeyDown.bind(this) }
                     // onClick={ this._createTodo }
                 />
                 { this._renderTodos() }

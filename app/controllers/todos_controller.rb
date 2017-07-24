@@ -1,5 +1,7 @@
 class TodosController < ApplicationController
 
+  before_action :set_todo, only: [ :update]
+
 
   def index
     @todos = current_user.todos.all
@@ -15,15 +17,21 @@ class TodosController < ApplicationController
     end
   end
 
-
-
   def update
     @todo = assign_todo
-    if @todo.update resource_params
+    if @todo.update todo_params
       respond_to do |format|
         format.json { render json: @todo }
       end
     end
+
+    @todo.update_attributes(:todo_valid => true)
+    save
+  end
+
+  def switch
+
+    @todo = Todo.find(id: params[:id])
   end
 
 
@@ -31,11 +39,14 @@ class TodosController < ApplicationController
     Todo.find params[:id => current_user.id]
   end
 
-
   private
 
   def todo_params
-    params.require(:todo).permit([:todo])
+    params.require(:todo).permit([:todo], :todo_valid, :user_id)
+  end
+
+  def set_todo!
+    @todo = Todo.find_by(id: params[:id])
   end
 
 end

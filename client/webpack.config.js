@@ -2,6 +2,8 @@
 // https://github.com/shakacode/react_on_rails/tree/master/spec/dummy/client
 // https://github.com/shakacode/react-webpack-rails-tutorial/tree/master/client
 
+
+
 const webpack = require('webpack');
 const { resolve } = require('path');
 
@@ -37,6 +39,7 @@ const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  
 
   plugins: [
     new webpack.EnvironmentPlugin({
