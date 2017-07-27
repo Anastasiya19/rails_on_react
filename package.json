@@ -8,6 +8,11 @@
     "@types/prop-types": "^15.5.1",
     "prop-types": "^15.5.10",
     "react": "^0.13.3",
-    "react-toggle-switch": "^2.1.4"
+    "react-native-double-click": "^1.0.3",
+    "react-toggle-switch": "^2.1.4",
+    "universal-panresponder": "^0.4.7"
+  },
+  "devDependencies": {
+    "react-edit-inline": "^1.0.8"
   }
 }

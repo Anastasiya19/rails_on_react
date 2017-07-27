@@ -27,9 +27,11 @@
     "rc-switch": "^1.5.2",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-native-double-click": "^1.0.3",
     "react-on-rails": "8.0.0",
     "webpack": "^2.3.3",
-    "webpack-manifest-plugin": "^1.1.0"
+    "webpack-manifest-plugin": "^1.1.0",
+    "react-edit-inline": "^1.0.8"
   },
   "devDependencies": {}
 }
