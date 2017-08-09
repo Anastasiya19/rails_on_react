@@ -86,7 +86,8 @@ export default class Todos extends React.Component {
     }
 
     todoActive(){
-        debugger
+
+        this.state.todos = this.props.todos
         let filterTodo= []
         this.state.todos.filter(function(todo_filter) {
 
@@ -95,11 +96,12 @@ export default class Todos extends React.Component {
             }
         })
         this.state.todos = filterTodo
-        this.setState({newTodo: filterTodo});
+        this.setState({todo: this.state.todos});
     }
 
     todoNoActive() {
-        debugger
+
+        this.state.todos = this.props.todos
         let filterTodo= []
         this.state.todos.filter(function(todo_filter) {
 
@@ -108,28 +110,42 @@ export default class Todos extends React.Component {
             }
         })
         this.state.todos = filterTodo
-        this.setState({todo: filterTodo});
+        this.setState({todo: this.state.todos});
+        // this.toggleSwitch.bind(this)
     }
 
-    // todoAll(){
-    //
-    //
-    // }
+    todoAll(){
+        this.state.todos = this.props.todos
+        this.setState({todo: this.state.todos});
 
-    _renderTodos(filterTodo) {
-        debugger
-        let shownTodos = this.props.todos.filter(function (todo_filter) {
-            switch (this.props.todos) {
-                case !this.state.todos:
-                    return todo_filter;
-                case filterTodo:
-                    return todo_filter;
-                default:
-                    return todo_filter;
-            }
-        }, this);
+    }
 
-        return shownTodos.map((todo, index)=>{
+    _renderTodos() {
+
+        // let shownTodos = this.props.todos.filter(function (todo_filter) {
+        //     // if(todo_filter.todo_valid == true){
+        //     //     return todo_filter;
+        //     // }else if(todo_filter.todo_valid == false){
+        //     //     return todo_filter;
+        //     // }else{
+        //     //     return
+        //     // }
+        //
+        //     switch (true) {
+        //         case todo_filter.todo_valid:
+        //             return this.state.todos
+        //             break;
+        //         // case false:
+        //         //     return todo_filter
+        //         //     break;
+        //         default:
+        //             return todo_filter
+        //             break;
+        //     }
+        //
+        // }, this);
+
+        return this.state.todos.map((todo, index)=>{
             return(
                 <div className="form-control" key={todo.id}>
                     <Switch
@@ -158,7 +174,7 @@ export default class Todos extends React.Component {
     }
 
     render() {
-        debugger
+
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
@@ -170,7 +186,7 @@ export default class Todos extends React.Component {
                     onKeyPress={ this._onKeyDown.bind(this) }
                 />
                 {this._renderTodos()}
-                <button>All</button>
+                <button onClick={this.todoAll.bind(this)}>All</button>
                 <button onClick={this.todoActive.bind(this)}>Active</button>
                 <button onClick={this.todoNoActive.bind(this)}>No active</button>
             </div>
