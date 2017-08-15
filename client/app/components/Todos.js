@@ -3,7 +3,6 @@ import {render} from 'react-dom';
 import Switch from 'rc-switch';
 import InlineEdit from 'react-edit-inline';
 
-
 let token = document.getElementsByName('csrf-token')[0].getAttribute('content');
 axios.defaults.headers.common['X-CSRF-Token'] = token;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -20,11 +19,36 @@ export default class Todos extends React.Component {
         super(props);
         this.state = {
             todos: this.props.todos,
+            initalState: this.props.todos,
             switched: false,
-            message: ' 1111',
+            message: ' '
         };
         this._renderTodos = this._renderTodos.bind(this);
-        // this.filterTodos = this.filterTodos.bind(this)
+        this.loadData = this.loadData.bind(this);
+    }
+
+    loadData() {
+        debugger
+        let activeTodos=[];
+        let noActiveTodos=[];
+        this.state.todos.map(function(todosItm){
+                switch(todosItm.todo_valid){
+                    case true: return(
+                        activeTodos.push(todosItm)
+                    );
+                        break;
+                    case false: return(
+                        noActiveTodos.push(todosItm)
+                    )
+                        break;
+                }
+        });
+        this.state.itm = noActiveTodos
+        this.state.data = activeTodos
+    }
+
+    updateData (config) {
+        this.setState(config);
     }
 
     dataChanged(id, mess) {
@@ -41,25 +65,42 @@ export default class Todos extends React.Component {
     }
 
     customValidateText(text) {
-        return (text.length > 0 && text.length < 200);
+        return (text.length > 0 && text.length < 600);
     }
 
-    deleteTodo (id, index){
+    deleteTodo(id, index){
+        debugger
+        this.state.todos = this.state.todos.filter((todo) => {
+            if(todo.id !== id) return todo;
+        });
+        this.state.itm = this.state.itm.filter((todo) => {
+            if(todo.id !== id) return todo;
+        });
+        this.state.data = this.state.data.filter((todo) => {
+            if(todo.id !== id) return todo;
+        });
+        this.state.initalState = this.state.initalState.filter((todo) => {
+            if(todo.id !== id) return todo;
+        });
 
         axios.delete(`/todos/${id}`, {
         }).then((response)=>{
-            var removed = this.state.todos.splice(index, 1);
-            this.setState({todo: this.state.removed});
+            console.log(response);
+            this.updateData(this.state)
         }).catch((error)=>{
             console.log(error);
         });
     }
 
     toggleSwitch(id, index) {
+        debugger
         axios.put(`/todos/${id}/switch`)
             .then((response) => {
                 this.state.todos[index] = response.data;
-                this.setState({todos: this.state.todos});
+                this.updateData(this.state);
+                this.initalState= this.state.todos;
+                this.setState({todos: this.state});
+                this.setState({initalState: this.state});
             })
             .catch(function (error) {
                 console.log(error);
@@ -67,11 +108,14 @@ export default class Todos extends React.Component {
     };
 
     _createTodo(todo) {
+        debugger
         axios.post('/todos', {
             todo: {todo: todo}
         }).then((response)=>{
             this.state.todos.push(response.data);
-            this.setState({todo: this.state.todos});
+            this.state.initalState.push(response.data);
+            this.updateData(this.state)
+            this.setState({todo: this.state});
             this.refs.newAddText.value = '';
         }).catch((error)=>{
             console.log(error);
@@ -85,66 +129,75 @@ export default class Todos extends React.Component {
         }
     }
 
+    // dataChanged(id, mess) {
+    //     axios.put(`/todos/${id}/update_todo`, {
+    //         todo: mess.message
+    //     })
+    //         .then((response) => {
+    //             this.state.todos[index]= response.data;
+    //             this.setState({todo: this.state.todos});
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error);
+    //         });
+    // }
+
     todoActive(){
+        debugger
+        // this.state.todos = this.state.todos.filter((todo) => {
+        //     if(todo.todo_valid == true) return todo;
 
-        this.state.todos = this.props.todos
-        let filterTodo= []
-        this.state.todos.filter(function(todo_filter) {
+        axios.get(`/todos`, {
 
-            if (todo_filter.todo_valid == true) {
-                return filterTodo.push(todo_filter)
-            }
         })
-        this.state.todos = filterTodo
-        this.setState({todo: this.state.todos});
+            .then((response) => {
+                console.log("response", response)
+                // this.state.todos[index]= response.data;
+                this.setState({todo: this.state.todos});
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        // });
     }
 
     todoNoActive() {
+        debugger
+        // this.state.todos = this.state.todos.filter((todo) => {
+        //     if(todo.todo_valid == false) return todo;
 
-        this.state.todos = this.props.todos
-        let filterTodo= []
-        this.state.todos.filter(function(todo_filter) {
+            axios.get(`/todos/${todo.id}/todo_active`, {
 
-            if (todo_filter.todo_valid == false) {
-                return filterTodo.push(todo_filter)
-            }
-        })
-        this.state.todos = filterTodo
-        this.setState({todo: this.state.todos});
-        // this.toggleSwitch.bind(this)
+            })
+                .then((response) => {
+                    console.log("response", response)
+                    // this.state.todos[index]= response.data;
+                    this.setState({todo: this.state.todos});
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        // });
     }
 
     todoAll(){
-        this.state.todos = this.props.todos
-        this.setState({todo: this.state.todos});
 
+        debugger
+            axios.get(`/todos`, {
+
+            })
+                .then((response) => {
+                    console.log("response", response)
+                    // this.state.todos[index]= response.data;
+                    this.setState({todo: this.state.todos});
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
     }
 
     _renderTodos() {
-
-        // let shownTodos = this.props.todos.filter(function (todo_filter) {
-        //     // if(todo_filter.todo_valid == true){
-        //     //     return todo_filter;
-        //     // }else if(todo_filter.todo_valid == false){
-        //     //     return todo_filter;
-        //     // }else{
-        //     //     return
-        //     // }
-        //
-        //     switch (true) {
-        //         case todo_filter.todo_valid:
-        //             return this.state.todos
-        //             break;
-        //         // case false:
-        //         //     return todo_filter
-        //         //     break;
-        //         default:
-        //             return todo_filter
-        //             break;
-        //     }
-        //
-        // }, this);
-
+        debugger
         return this.state.todos.map((todo, index)=>{
             return(
                 <div className="form-control" key={todo.id}>
@@ -164,17 +217,16 @@ export default class Todos extends React.Component {
                             display: 'inline-block',
                             margin: 0,
                             fontSize: 15,
-                            outline: 0,
+                            outline: 0
                          }}
                     />
-                    <button  className="delete-button" onClick={this.deleteTodo.bind(this, todo.id, index)}>x</button>
+                    <button className="delete-button" onClick={this.deleteTodo.bind(this, todo.id, index)}>x</button>
                 </div>
             )
         })
     }
 
     render() {
-
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
@@ -186,9 +238,11 @@ export default class Todos extends React.Component {
                     onKeyPress={ this._onKeyDown.bind(this) }
                 />
                 {this._renderTodos()}
-                <button onClick={this.todoAll.bind(this)}>All</button>
-                <button onClick={this.todoActive.bind(this)}>Active</button>
-                <button onClick={this.todoNoActive.bind(this)}>No active</button>
+                <div className="buttons">
+                    <button className="button-active" onClick={this.todoAll.bind(this)}>All</button>
+                    <button className="button-active" onClick={this.todoActive.bind(this)}>Active</button>
+                    <button className="button-active" onClick={this.todoNoActive.bind(this)}>No active</button>
+                </div>
             </div>
         );
     }
