@@ -8,13 +8,12 @@ Rails.application.routes.draw do
   resources :todos do
     member do
       put :switch, :update_todo
-
     end
-    get :todo_active
-
+      get :todo_active
+      put :todo_active
   end
 
-  resources :users
 
+  resources :users
 
 end

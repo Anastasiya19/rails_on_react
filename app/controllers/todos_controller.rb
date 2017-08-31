@@ -4,35 +4,18 @@ class TodosController < ApplicationController
   respond_to :json
 
   def index
-    # byebug
-    # @todo = Todo.find_by(todo_valid: params[:todo_valid])
-    # @todos = current_user.todos.order(:id)
-    # # render json: @todo
-    #
-    # @todo = assign_todo
-    @todo = Todo.find_by(id: params[:id])
-
-    if params[:todo_valid] == "true"
-      @todos = current_user.todos.order(:id)
-      render json: @todo
-    else
-      @todos = current_user.todos.order(:id)
-      # render json: @todo
+    case params[:sort]
+      when 'active'
+        @todos = current_user.todos.where(todo_valid: true).order(:id)
+      when 'inactive'
+        @todos = current_user.todos.where(todo_valid: false).order(:id)
+      else
+        @todos = current_user.todos.order(:id)
     end
-  end
-
-  def new
-    @todos = Todos.new
-  end
-
-  def todo_active
-    # byebug
-    # Todo.find params[:id => current_user.id]
-    # if params[:todo_valid] == 'true'
-      @todo = Todo.find_by(todo_valid: params[:todo_valid] == 'false')
-      # @todos = current_user.todos.order(:id)
-    # else
-    # end
+    respond_to do |format|
+      format.html
+      format.json { render json: @todos }
+    end
   end
 
   def create
@@ -71,10 +54,6 @@ class TodosController < ApplicationController
   def show
     respond_with assign_todo
   end
-
-  # def assign_todo
-  #   Todo.find params[:id => current_user.id]
-  # end
 
   private
 
