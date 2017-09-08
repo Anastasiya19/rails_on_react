@@ -6,7 +6,7 @@
   "private": true,
   "dependencies": {
     "@types/prop-types": "^15.5.1",
-    "express": "^4.15.4",
+    "express": "4.15.4",
     "img": "^3.0.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
