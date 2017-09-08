@@ -9,7 +9,7 @@ end
 gem "rails_12factor", group: :production
 ruby "2.3.1"
 
-gem "react_on_rails", "^9.0.0"
+gem "react_on_rails", "9.0.0"
 
 gem 'devise'
 gem 'bootstrap-sass'
