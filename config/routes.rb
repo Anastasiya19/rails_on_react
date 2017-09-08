@@ -13,7 +13,6 @@ Rails.application.routes.draw do
       put :todo_active
   end
 
-
   resources :users
 
 end

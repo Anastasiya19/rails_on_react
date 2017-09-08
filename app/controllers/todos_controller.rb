@@ -41,19 +41,19 @@ class TodosController < ApplicationController
     end
   end
 
-  def update_todo
-    @todo.update_attribute('todo', params[:todo])
-    render json: @todo
-  end
+  # def update_todo
+  #   @todo.update_attribute('todo', params[:todo])
+  #   render json: @todo
+  # end
 
   def switch
     @todo.update_attribute('todo_valid', !@todo.todo_valid)
     render json: @todo
   end
-
-  def show
-    respond_with assign_todo
-  end
+  #
+  # def show
+  #   respond_with assign_todo
+  # end
 
   private
 

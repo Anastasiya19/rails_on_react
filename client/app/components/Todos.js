@@ -12,13 +12,6 @@ axios.defaults.headers.common['Accept'] = 'application/json';
 
 export default class Todos extends React.Component {
 
-    // getInitialState() {
-    //     debugger
-    //     return {
-    //         text: ''
-    //     }
-    // }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -127,7 +120,7 @@ export default class Todos extends React.Component {
                             outline: 0
                          }}
                     />
-                    <button className="delete-button" onClick={this.deleteTodo.bind(this, todo.id) }>x</button>
+                    <button className="delete-button" onClick={this.deleteTodo.bind(this, todo.id)}>x</button>
                 </div>
             )
         })
@@ -137,6 +130,7 @@ export default class Todos extends React.Component {
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
+                <img src="/backgr"/>
                 <input
                     type="text"
                     className="form-control"
@@ -148,7 +142,7 @@ export default class Todos extends React.Component {
                 <div className="buttons">
                     <button className="button-active" onClick={this.sortTodos.bind(this, "all")}>All</button>
                     <button className="button-active" onClick={this.sortTodos.bind(this, "active")}>Active</button>
-                    <button className="button-active"onClick={this.sortTodos.bind(this, "inactive")}>No active</button>
+                    <button className="button-active" onClick={this.sortTodos.bind(this, "inactive")}>No active</button>
                 </div>
             </div>
         );

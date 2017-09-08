@@ -16,15 +16,3 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
-
-//
-// $(document).on('turbolinks:load', function() {
-//     $('.chosen-select').chosen();
-//
-//     $('.all').click(function() {
-//         setTimeout(function() {
-//             $('.chosen-select').chosen();
-//         }, 0);
-//
-//     });
-// });

@@ -1,7 +1,7 @@
 import ReactOnRails from 'react-on-rails';
 
 import Static from '../components/Static';
-import Todos from '../components/Todos';
+import Todos from '../components/Todos.js';
 
 
 // This is how react_on_rails can see the HelloWorld in the browser.
