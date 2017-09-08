@@ -15,9 +15,10 @@
     "react-img": "^1.0.3",
     "react-native-double-click": "^1.0.3",
     "react-toggle-switch": "^2.1.4",
-    "universal-panresponder": "^0.4.7"
+    "universal-panresponder": "^0.4.12"
   },
   "devDependencies": {
+    "build-test": "^2.0.15",
     "react-edit-inline": "1.0.8"
   }
 }
