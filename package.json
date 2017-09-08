@@ -18,7 +18,6 @@
     "universal-panresponder": "^0.4.12"
   },
   "devDependencies": {
-    "build-test": "^2.0.15",
     "react-edit-inline": "1.0.8"
   }
 }
