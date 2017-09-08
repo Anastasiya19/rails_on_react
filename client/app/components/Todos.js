@@ -22,14 +22,11 @@ export default class Todos extends React.Component {
     }
     
     dataChanged(id, mess) {
-        debugger
-        // this.state.todos.todo = mess.message
         axios.put(`/todos/${id}/update_todo`, {
             todo: mess.message
         })
         .then((response) => {
             this.state.todos[index]= response.data;
-            // this.setState({todo: this.state.todos.todo});
             this.setState({todo: mess});
         })
         .catch(function (error) {
@@ -53,7 +50,6 @@ export default class Todos extends React.Component {
             console.log(error);
         });
     }
-
 
     toggleSwitch(id, index) {
         axios.put(`/todos/${id}/switch`)
@@ -130,7 +126,6 @@ export default class Todos extends React.Component {
         return (
             <div className="body-todo">
                 <h2 className="todo-fount">Todo List </h2>
-                <img src="/backgr"/>
                 <input
                     type="text"
                     className="form-control"
