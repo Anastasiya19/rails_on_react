@@ -140,6 +140,8 @@ Devise.setup do |config|
   # unconfirmed_email column, and copied to email column on successful confirmation.
   config.reconfirmable = true
 
+  config.secret_key = '5d04a17ca933e89618748141ee94cf29e95915ef4ef439726b184b04eb7126b3bd03c221af9b6b64f49dbf205396bcd196d443f0bb3cd79490d75450c5543bb1'
+
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
 
