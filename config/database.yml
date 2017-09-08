@@ -84,4 +84,4 @@ production:
   <<: *default
   database: react_on_rails_production
   username: react_on_rails
-  password: <%= ENV['REACT_ON_RAILS_DATABASE_PASSWORD'] %>
+#  password: <%= ENV['REACT_ON_RAILS_DATABASE_PASSWORD'] %>
