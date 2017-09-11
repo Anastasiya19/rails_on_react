@@ -18,6 +18,8 @@ gem 'jquery-rails'
 
 gem "responders"
 
+gem 'bootstrap-modal-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record
@@ -33,6 +35,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+
+# gem 'rails_admin', '~> 1.2'
 
 # gem "mail_view", "~> 2.0.4"
 

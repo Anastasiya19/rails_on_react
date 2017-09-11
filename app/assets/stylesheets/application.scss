@@ -11,9 +11,12 @@
  * It is generally better to create a new file per style scope.
  *
  */
+
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "index.css";
+
 
 .body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
