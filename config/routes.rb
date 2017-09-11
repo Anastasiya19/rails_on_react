@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
+
   devise_for :users, :controllers => { registrations: 'registrations' }
   root 'todos#index'
 
   get 'users/index'
+
 
   resources :todos do
     member do

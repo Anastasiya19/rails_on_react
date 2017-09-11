@@ -16,7 +16,6 @@ gem 'bootstrap-sass'
 
 gem 'jquery-rails'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record
@@ -32,6 +31,8 @@ gem 'uglifier', '>= 1.3.0'
 
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+
+# gem "mail_view", "~> 2.0.4"
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
