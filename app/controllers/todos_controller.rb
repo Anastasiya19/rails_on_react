@@ -28,7 +28,6 @@ class TodosController < ApplicationController
   end
 
   def destroy
-    byebug
     @todo = Todo.find_by(id: params[:id])
     @todo.destroy if @todo
     author = current_user
