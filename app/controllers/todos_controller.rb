@@ -32,6 +32,10 @@ class TodosController < ApplicationController
     @todo.destroy if @todo
     author = current_user
     UserMailer.delete_todo(author).deliver_now
+    respond_to do |format|
+      format.html
+      format.json { render json: @todos }
+    end
   end
 
   def update
