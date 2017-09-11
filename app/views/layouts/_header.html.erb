@@ -3,6 +3,6 @@
     <%= link_to 'Add todo', todos_path, class: "link-to-nav" %>
     <%= link_to 'Edit profile', edit_user_registration_path, class: "link-to-nav" %>
     <%= link_to 'Sign out',  destroy_user_session_path,  class: "link-to-nav sign-header" , :method => :delete%>
-    <% = link_to ' Создать категорию ' , new_category_path, data: { modal:  true } %>
+    <%= link_to ' Create category ' , new_category_path, data: { modal:  true } %>
   </nav>
 </div>

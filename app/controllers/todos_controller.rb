@@ -25,6 +25,7 @@ class TodosController < ApplicationController
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
+    respond_modal_with @todo
   end
 
   def destroy
