@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   get 'users/index'
 
-
   resources :todos do
     member do
       put :switch, :update_todo
@@ -15,6 +14,8 @@ Rails.application.routes.draw do
       put :todo_active
   end
 
+  resources "contacts", only: [:new, :create]
+  # resources :contacts
   resources :users
 
 end

@@ -20,6 +20,8 @@ gem "responders"
 
 gem 'bootstrap-modal-rails'
 
+gem 'bootstrap_form'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use postgresql as the database for Active Record
@@ -39,7 +41,9 @@ gem 'will_paginate-bootstrap'
 # gem 'rails_admin', '~> 1.2'
 
 # gem "mail_view", "~> 2.0.4"
+gem 'mail_form'
 
+gem 'simple_form'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

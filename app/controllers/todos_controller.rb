@@ -22,6 +22,7 @@ class TodosController < ApplicationController
     @todo = current_user.todos.new(todo_params)
     if @todo.save
       render json: @todo
+      flash[:notice] = 'Example has been created!'
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
@@ -29,6 +30,7 @@ class TodosController < ApplicationController
 
   def destroy
     @todo = Todo.find_by(id: params[:id])
+    flash[:success] = 'You delete your todo and you sent a message!'
     @todo.destroy if @todo
     author = current_user
     UserMailer.delete_todo(author).deliver_now
