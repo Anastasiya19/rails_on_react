@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       put :todo_active
   end
 
-  resources "contacts", only: [:new, :create]
+  resources :contacts, only: [:new, :create]
   # resources :contacts
   resources :users
 
