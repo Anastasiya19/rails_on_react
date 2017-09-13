@@ -51,7 +51,7 @@ Rails.application.configure do
   config.assets.quiet = true
 
 
-  config.action_mailer.default_url_options = { host: '0.0.0.0:3000' }
+  config.action_mailer.default_url_options = { host: 'https://list-add-todo.herokuapp.com' }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
