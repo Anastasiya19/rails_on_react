@@ -30,14 +30,14 @@ class TodosController < ApplicationController
 
   def destroy
     @todo = Todo.find_by(id: params[:id])
-    flash[:success] = 'You delete your todo and you sent a message!'
     @todo.destroy if @todo
     author = current_user
     UserMailer.delete_todo(author).deliver_now
     respond_to do |format|
-      format.html
+      # format.html
       format.json { render json: @todos }
     end
+    flash[:success] = 'You delete your todo and you sent a message!'
   end
 
   def update
@@ -58,10 +58,6 @@ class TodosController < ApplicationController
     @todo.update_attribute('todo_valid', !@todo.todo_valid)
     render json: @todo
   end
-  #
-  # def show
-  #   respond_with assign_todo
-  # end
 
   private
 
