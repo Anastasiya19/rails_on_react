@@ -32,7 +32,7 @@ class TodosController < ApplicationController
     @todo = Todo.find_by(id: params[:id])
     @todo.destroy if @todo
     author = current_user
-    UserMailer.delete_todo(author).deliver_now
+    UserMailer.delete_todo(author).deliver
     respond_to do |format|
       # format.html
       format.json { render json: @todos }
