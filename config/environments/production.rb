@@ -86,7 +86,7 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
 
-  # config.action_mailer.default_url_options = { host: ENV['SERVER_ROOT'] }
+  config.action_mailer.default_url_options = { host: 'https://list-add-todo.herokuapp.com/' }
 
   ActionMailer::Base.smtp_settings = {
       user_name: 'dmkryhtin',
