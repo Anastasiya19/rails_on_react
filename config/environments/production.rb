@@ -87,15 +87,15 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: 'https://list-add-todo.herokuapp.com' }
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.default_url_options = { host: 'https://list-add-todo.herokuapp.com' }
 
   ActionMailer::Base.smtp_settings = {
       user_name: 'dmkryhtin',
       password: 'purrweb1234',
       domain: 'localhost.com',
-      address: 'smtp.gmail.com',
+      address: 'smtp.sendgrid.net',
       port: 587,
       authentication: :plain,
       enable_starttls_auto: true
