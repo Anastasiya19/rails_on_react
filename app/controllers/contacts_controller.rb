@@ -5,7 +5,8 @@ class ContactsController < ApplicationController
   end
 
   def create
-    @contact = Contact.new(params[:contact])
+    byebug
+    @contact = Contact.new(contact_params)
     @contact.request = request
     if @contact.deliver
       flash.now[:error] = nil
@@ -15,6 +16,10 @@ class ContactsController < ApplicationController
       # render :new
       redirect_to (:back), notice:'Cannot send message'
     end
+  end
+
+  def contact_params
+    params.require(:contact).permit(:name, :message)
   end
 
 end

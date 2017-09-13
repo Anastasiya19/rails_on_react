@@ -50,15 +50,21 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
+
+  config.action_mailer.default_url_options = { host: '0.0.0.0:3000' }
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-      :address => "smtp.gmail.com",
-      :port => 587,
-      :domain => "gmail.com",
-      :user_name => "sugukvs92",
-      :password => "**************",
-      :authentication => "plain",
-      :enable_starttls_auto => true
+      user_name: 'dmkryhtin',
+      password: 'purrweb1234',
+      domain: 'localhost.com',
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      authentication: :plain,
+      enable_starttls_auto: true
   }
 
   # Raises error for missing translations
